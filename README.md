@@ -1,5 +1,10 @@
 # 📊 TrackIt
 
+![Project Status](https://img.shields.io/badge/status-em%20desenvolvimento-blue)
+![Vite](https://img.shields.io/badge/Vite-%23646CFF?style=flat&logo=vite&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC?style=flat&logo=typescript&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 Gerenciador de hábitos diário construído em **React + TypeScript**, focado em ajudar os usuários a monitorar e consolidar suas rotinas diárias de forma prática, visual e responsiva.
 
 ---
@@ -44,7 +49,7 @@ Este projeto foi desenvolvido como **entrega obrigatória** do **Desafio do Mód
 ### 🔧 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/trackit.git
+git clone https://github.com/arijunior2020/desafio-driven-tracklt.git
 cd trackit
 ```
 
