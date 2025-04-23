@@ -100,3 +100,5 @@ Desenvolvido por Arimatéia Júnior
 ## 📝 9. Licença
 
 Este projeto é de uso educacional como parte do curso Driven Full Stack Developer.
+
+**OBS**: Foi necessário substituir o componente react-loader-spinner por outro modelo de spinner devido à incompatibilidade com a versão 19 do React utilizada no projeto. O pacote apresentava erros de dependência durante o deploy na Vercel. O spinner adotado foi o react-spinners, que é leve, compatível com React 19 e oferece diversos loaders visuais com fácil customização. [react-spinners](https://www.npmjs.com/package/react-spinners)
