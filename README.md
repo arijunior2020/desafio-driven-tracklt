@@ -87,11 +87,16 @@ Neste módulo, consolidei conhecimentos em:
 - Organização de estado em projetos React complexos
 - Integração com APIs REST e controle de autenticação via token
 
-### 👨‍💻 Autor
+### 🚀 7. Deploy
+
+A aplicação está hospedada no Vercel e pode ser acessada através do seguinte link:
+[TrackIt](https://desafio-driven-tracklt.vercel.app/)
+
+### 👨‍💻 8. Autor
 
 Desenvolvido por Arimatéia Júnior
 🔗 linkedin.com/in/arimateiajunior
 
-## 📝 Licença
+## 📝 9. Licença
 
 Este projeto é de uso educacional como parte do curso Driven Full Stack Developer.
