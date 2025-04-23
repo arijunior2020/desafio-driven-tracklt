@@ -51,11 +51,11 @@ export default function HabitToday() {
     api
       .post(endpoint, {}, config)
       .then(() => {
-        const updated = habits.map((h) =>
-          h.id === habit.id ? { ...h, done: !h.done } : h
-        );
-        setHabits(updated);
-        updateProgress(updated);
+        return api.get("/habits/today", config);
+      })
+      .then((res) => {
+        setHabits(res.data);
+        updateProgress(res.data);
       })
       .catch(() => {
         alert("Erro ao atualizar hábito.");
