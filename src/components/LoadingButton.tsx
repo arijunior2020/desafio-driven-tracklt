@@ -1,4 +1,4 @@
-import { ThreeDots } from "react-loader-spinner";
+import { ClipLoader } from "react-spinners";
 import styled from "styled-components";
 
 interface Props {
@@ -25,7 +25,7 @@ export default function LoadingButton({
       $width={width}
       $height={height}
     >
-      {loading ? <ThreeDots height={10} width={30} color="#ffffff" /> : text}
+      {loading ? <ClipLoader size={10} color="#ffffff" /> : text}
     </Button>
   );
 }

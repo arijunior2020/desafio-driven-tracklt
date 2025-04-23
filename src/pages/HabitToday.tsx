@@ -10,7 +10,7 @@ import TodayHabit from "../components/TodayHabit";
 import { api } from "../services/api";
 import { User } from "../types/user";
 import { TodayHabit as TodayHabitType } from "../types/habit";
-import { ThreeDots } from "react-loader-spinner";
+import { ClipLoader } from "react-spinners";
 
 export default function HabitToday() {
   const { user } = useContext(UserContext) as { user: User };
@@ -72,7 +72,7 @@ export default function HabitToday() {
 
         {isLoading ? (
           <LoadingContainer>
-            <ThreeDots color="#52b6ff" height={80} width={80} />
+            <ClipLoader color="#52b6ff" size={80} />
             <span>Carregando hábitos...</span>
           </LoadingContainer>
         ) : habits.length === 0 ? (

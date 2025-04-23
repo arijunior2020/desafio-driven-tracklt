@@ -8,7 +8,7 @@ import Footer from "../components/Footer";
 import HabitItem from "../components/HabitItem";
 import LoadingButton from "../components/LoadingButton";
 import { api } from "../services/api";
-import { ThreeDots } from "react-loader-spinner";
+import { ClipLoader } from "react-spinners";
 
 const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
 
@@ -144,7 +144,7 @@ export default function Habit() {
 
         {isLoading ? (
           <LoaderWrapper>
-            <ThreeDots color="#52b6ff" height={80} width={80} />
+            <ClipLoader color="#52b6ff" size={80} />
             <span>Carregando hábitos...</span>
           </LoaderWrapper>
         ) : habits.length === 0 ? (
