@@ -91,9 +91,10 @@ export default function Habit() {
       })
       .catch(() => {
         alert("Erro ao salvar hábito");
-        setLoading(false); // Se der erro, tira o loading na hora
+        setLoading(false);
       });
   }
+
   return (
     <>
       <Header />
@@ -258,6 +259,12 @@ const Buttons = styled.div`
     background: none;
     border: none;
     font-family: "Lexend Deca", sans-serif;
+    cursor: pointer;
+
+    &:disabled {
+      color: #cfcfcf; /* <-- cinza claro */
+      cursor: not-allowed;
+    }
   }
 `;
 
