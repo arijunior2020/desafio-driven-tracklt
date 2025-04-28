@@ -61,8 +61,6 @@ export default function Habit() {
 
     setLoading(true);
 
-    const start = Date.now();
-
     const body: CreateHabitData = {
       name: newHabit,
       days: selectedDays,
@@ -80,17 +78,12 @@ export default function Habit() {
         setNewHabit("");
         setSelectedDays([]);
         setShowForm(false);
-
-        const elapsed = Date.now() - start;
-        const delay = Math.max(10000 - elapsed, 0);
-
-        setTimeout(() => {
-          loadHabits();
-          setLoading(false);
-        }, delay);
+        loadHabits();
       })
       .catch(() => {
         alert("Erro ao salvar hábito");
+      })
+      .finally(() => {
         setLoading(false);
       });
   }
