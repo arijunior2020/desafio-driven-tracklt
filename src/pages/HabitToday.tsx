@@ -6,7 +6,6 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { UserContext } from "../contexts/UserContextBase";
 import { ProgressContext } from "../contexts/ProgressContextBase";
-import TodayHabit from "../components/TodayHabit";
 import { api } from "../services/api";
 import { User } from "../types/user";
 import { TodayHabit as TodayHabitType } from "../types/habit";
@@ -17,6 +16,7 @@ export default function HabitToday() {
   const { setProgress } = useContext(ProgressContext);
   const [habits, setHabits] = useState<TodayHabitType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadingHabitId, setLoadingHabitId] = useState<number | null>(null); // <- para controlar loading individual
 
   const config = {
     headers: { Authorization: `Bearer ${user?.token}` },
@@ -46,19 +46,22 @@ export default function HabitToday() {
   }
 
   function toggleHabit(habit: TodayHabitType) {
+    setLoadingHabitId(habit.id); // Começa o loading no hábito clicado
+
     const endpoint = `/habits/${habit.id}/${habit.done ? "uncheck" : "check"}`;
 
     api
       .post(endpoint, {}, config)
-      .then(() => {
-        return api.get("/habits/today", config);
-      })
+      .then(() => api.get("/habits/today", config))
       .then((res) => {
         setHabits(res.data);
         updateProgress(res.data);
       })
       .catch(() => {
         alert("Erro ao atualizar hábito.");
+      })
+      .finally(() => {
+        setLoadingHabitId(null); // Termina o loading
       });
   }
 
@@ -78,15 +81,30 @@ export default function HabitToday() {
         ) : habits.length === 0 ? (
           <p>Você ainda não tem hábitos para hoje.</p>
         ) : (
-          habits.map((h) => (
-            <TodayHabit
-              key={h.id}
-              name={h.name}
-              done={h.done}
-              currentSequence={h.currentSequence}
-              highestSequence={h.highestSequence}
-              onCheck={() => toggleHabit(h)}
-            />
+          habits.map((habit) => (
+            <HabitCard key={habit.id}>
+              <HabitInfo>
+                <h3>{habit.name}</h3>
+                <p>
+                  Sequência atual: <strong>{habit.currentSequence} dias</strong>
+                </p>
+                <p>
+                  Seu recorde: <strong>{habit.highestSequence} dias</strong>
+                </p>
+              </HabitInfo>
+
+              <CheckButton
+                onClick={() => toggleHabit(habit)}
+                disabled={loadingHabitId === habit.id}
+                isDone={habit.done}
+              >
+                {loadingHabitId === habit.id ? (
+                  <ClipLoader color="#ffffff" size={14} />
+                ) : (
+                  "✓"
+                )}
+              </CheckButton>
+            </HabitCard>
           ))
         )}
       </Container>
@@ -124,4 +142,48 @@ const LoadingContainer = styled.div`
   font-family: "Lexend Deca", sans-serif;
   font-size: 16px;
   gap: 8px;
+`;
+
+const HabitCard = styled.div`
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const HabitInfo = styled.div`
+  h3 {
+    font-size: 20px;
+    color: #666666;
+    margin-bottom: 8px;
+    font-family: "Lexend Deca", sans-serif;
+  }
+
+  p {
+    font-size: 13px;
+    margin: 2px 0;
+    font-family: "Lexend Deca", sans-serif;
+  }
+`;
+
+const CheckButton = styled.button<{ isDone: boolean }>`
+  width: 69px;
+  height: 69px;
+  background-color: ${({ isDone }) => (isDone ? "#8FC549" : "#EBEBEB")};
+  border: 1px solid #e7e7e7;
+  border-radius: 5px;
+  font-size: 36px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
 `;

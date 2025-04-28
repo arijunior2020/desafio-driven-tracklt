@@ -92,7 +92,7 @@ Neste módulo, consolidei conhecimentos em:
 A aplicação está hospedada no Vercel e pode ser acessada através do seguinte link:
 [TrackIt](https://desafio-driven-tracklt.vercel.app/)
 
-Link: (https://desafio-driven-tracklt.vercel.app/)
+Link: https://desafio-driven-tracklt.vercel.app/
 
 ### 👨‍💻 8. Autor
 
