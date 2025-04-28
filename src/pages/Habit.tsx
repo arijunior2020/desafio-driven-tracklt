@@ -75,20 +75,24 @@ export default function Habit() {
     };
 
     api
-      .post("/habits", body, config)
-      .then(() => {
-        setNewHabit("");
-        setSelectedDays([]);
-        setShowForm(false);
+    .post("/habits", body, config)
+    .then(() => {
+      setNewHabit("");
+      setSelectedDays([]);
+      setShowForm(false);
+
+      const elapsed = Date.now() - start;
+      const delay = Math.max(10000 - elapsed, 0);
+
+      setTimeout(() => {
         loadHabits();
-      })
-      .catch(() => alert("Erro ao salvar hábito"))
-      .finally(() => {
-        const elapsed = Date.now() - start;
-        const delay = Math.max(10000 - elapsed, 0);
-        setTimeout(() => setLoading(false), delay);
-      });
-  }
+        setLoading(false);
+      }, delay);
+    })
+    .catch(() => {
+      alert("Erro ao salvar hábito");
+      setLoading(false); // Se der erro, tira o loading na hora
+    });
 
   return (
     <>
