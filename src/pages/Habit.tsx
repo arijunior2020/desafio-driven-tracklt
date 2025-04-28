@@ -53,6 +53,12 @@ export default function Habit() {
 
   function saveHabit(e: React.FormEvent) {
     e.preventDefault();
+
+    if (selectedDays.length === 0) {
+      alert("Selecione pelo menos um dia para o hábito.");
+      return;
+    }
+
     setLoading(true);
 
     const start = Date.now();
@@ -79,7 +85,7 @@ export default function Habit() {
       .catch(() => alert("Erro ao salvar hábito"))
       .finally(() => {
         const elapsed = Date.now() - start;
-        const delay = Math.max(3000 - elapsed, 0);
+        const delay = Math.max(10000 - elapsed, 0);
         setTimeout(() => setLoading(false), delay);
       });
   }
